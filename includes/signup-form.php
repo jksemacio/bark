@@ -25,7 +25,7 @@
         }
         else {
           $u->register($screen_name, $email, $password);
-          header('Location: home.php');
+          header('Location: signup.php?step=1');
         }
       }
     }

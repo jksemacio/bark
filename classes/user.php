@@ -64,6 +64,21 @@ class User {
     }
   }
 
+  public function check_username($username) {
+    $sql = "SELECT `username` FROM `users` WHERE `username` = :username";
+    $stmt = $this->pdo->prepare($sql);
+    $stmt->bindParam(":username", $username, PDO::PARAM_STR);
+    $stmt->execute();
+
+    $count = $stmt->rowCount();
+    if($count > 0) {
+      return true;
+    }
+    else {
+      return false;
+    }
+  }
+
   public function register($screen_name, $email, $password) {
     $sql = "INSERT INTO `users` (`screen_name`, `email`, `password`) VALUES (:screen_name, :email, :password)";
     $stmt = $this->pdo->prepare($sql);
@@ -88,6 +103,23 @@ class User {
     return $this->pdo->lastInsertId();
   }
 
-  
+  public function update($table, $user_id, $fields = array()) {
+    $columns = '';
+    $i = 1;
+    foreach($fields as $name => $value) {
+      $columns .= "{$name} = :{$name}";
+      if(count($fields) > $i) {
+        $columns .= ', ';
+      }
+      $i++;
+    }
+    $sql = "UPDATE {$table} SET {$columns} WHERE `user_id` = {$user_id}";
+    $stmt = $this->pdo->prepare($sql);
+    foreach($fields as $key => $value) {
+      $stmt->bindValue(':' . $key, $value);
+    }
+    $stmt->execute();
+  }
+
 }
 ?>
