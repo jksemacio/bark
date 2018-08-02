@@ -48,5 +48,46 @@ class User {
     session_destroy();
     header('Location: index.php');
   }
+
+  public function check_email($email) {
+    $sql = "SELECT `email` FROM `users` WHERE `email` = :email";
+    $stmt = $this->pdo->prepare($sql);
+    $stmt->bindParam(":email", $email, PDO::PARAM_STR);
+    $stmt->execute();
+
+    $count = $stmt->rowCount();
+    if($count > 0) {
+      return true;
+    }
+    else {
+      return false;
+    }
+  }
+
+  public function register($screen_name, $email, $password) {
+    $sql = "INSERT INTO `users` (`screen_name`, `email`, `password`) VALUES (:screen_name, :email, :password)";
+    $stmt = $this->pdo->prepare($sql);
+    $stmt->bindParam(":screen_name", $screen_name, PDO::PARAM_STR);
+    $stmt->bindParam(":email", $email, PDO::PARAM_STR);
+    $stmt->bindParam(":password", md5($password), PDO::PARAM_STR);
+    $stmt->execute();
+
+    $user_id = $this->pdo->lastInsertId();
+    $_SESSION['user_id'] = $user_id;
+  }
+
+  public function create($table, $fields = array()) {
+    $columns = implode(', ', array_keys($fields));
+    $values = ":" . implode(', :', array_keys($fields));
+    $sql = "INSERT INTO {$table} ({$columns}) VALUES ({$values})";
+    $stmt = $this->pdo->prepare($sql);
+    foreach($fields as $key => $data) {
+      $stmt->bindValue(':' . $key, $data);
+    }
+    $stmt->execute();
+    return $this->pdo->lastInsertId();
+  }
+
+  
 }
 ?>

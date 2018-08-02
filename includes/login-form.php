@@ -8,7 +8,7 @@
       $password = $u->check_input($password);
 
       if(!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        $error = "Invalid format";
+        $error = "Invalid email format";
       }
       else {
         if($u->login($email, $password) == false) {
