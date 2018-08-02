@@ -46,7 +46,7 @@ class User {
   public function logout() {
     $_SESSION = array();
     session_destroy();
-    header('Location: index.php');
+    header('Location: '.BASE_URL.'index.php');
   }
 
   public function check_email($email) {
@@ -121,5 +121,14 @@ class User {
     $stmt->execute();
   }
 
+  public function userIdByUsername($username) {
+    $sql = "SELECT `user_id` FROM `users` WHERE `username` = :username";
+    $stmt = $this->pdo->prepare($sql);
+    $stmt->bindParam(":username", $username, PDO::PARAM_STR);
+    $stmt->execute();
+
+    $user = $stmt->fetch(PDO::FETCH_OBJ);
+    return $user->user_id;
+  }
 }
 ?>

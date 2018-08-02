@@ -1,7 +1,14 @@
 <?php
   include 'init.php';
+  if(!isset($_SESSION['user_id'])) {
+    header('Location: index.php');
+  }
+
   $user_id = $_SESSION['user_id'];
   $user = $u->user_data($user_id);
+  if(!isset($_SESSION['user_id'])) {
+    header('Location: index.php');
+  }
 
   echo "Username: " . $user->username . "<br>";
   echo "Email: " . $user->email . "<br>";

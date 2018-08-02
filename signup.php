@@ -49,8 +49,9 @@
     <?php } ?>
     <?php
       if(isset($_GET['step']) and $_GET['step'] == 2) {
-        echo "Welcome!";
-      }
     ?>
+    <h3>Welcome!</h3>
+    <a href="home.php">Let's Go</a>
+    <?php } ?>
   </body>
 </html>
