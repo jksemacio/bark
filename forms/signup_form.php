@@ -1,8 +1,8 @@
 <?php
   if(isset($_POST['signup'])) {
     $screen_name = $_POST['screen_name'];
-    $email = $_POST['email'];
-    $password = $_POST['password'];
+    $email = $_POST['email_signup'];
+    $password = $_POST['password_signup'];
     $error = '';
 
     if(!empty($screen_name) or !empty($email) or !empty($password)) {
@@ -36,18 +36,20 @@
 
 ?>
 <form method="post">
-  <h3>Signup</h3>
-  <ul>
-    <li><input type="text" name="screen_name" placeholder="Full Name"></li>
-    <li><input type="text" name="email" placeholder="Email"></li>
-    <li><input type="password" name="password" placeholder="Password"></li>
-    <li><input type="submit" name="signup" value="Signup for Bark"></li>
-  </ul>
+  <div class="form-group">
+    <label for="screen_name">Full Name</label>
+    <input type="text" class="form-control" id="screen_name" name="screen_name" placeholder="Full Name">
+  </div>
+  <div class="form-group">
+    <label for="email_signup">Email address</label>
+    <input type="email" class="form-control" id="email_signup" name="email_signup" placeholder="Enter email">
+  </div>
+  <div class="form-group">
+    <label for="password_signup">Password</label>
+    <input type="password" class="form-control" id="password_signup" name="password_signup" placeholder="Password">
+  </div>
+  <button type="submit" name="signup" class="btn btn-primary">Signup for Bark</button>
   <span>
-    <?php
-      if(isset($error)) {
-        echo $error;
-      }
-    ?>
+    <?php if(isset($error)) { echo $error; } ?>
   </span>
 </form>

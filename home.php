@@ -10,10 +10,15 @@
     header('Location: index.php');
   }
 
+  include 'header.php';
+
   echo "Username: " . $user->username . "<br>";
   echo "Email: " . $user->email . "<br>";
   echo "Full Name: " . $user->screen_name . "<br>";
   echo "Following: " . $user->following . "<br>";
   echo "Followers: " . $user->followers . "<br>";
+
+  echo '<a href="logout.php">Log out</a>';
+
+  include 'footer.php';
 ?>
-<a href="logout.php">Log out</a>

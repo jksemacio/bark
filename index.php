@@ -3,15 +3,9 @@
   if(isset($_SESSION['user_id'])) {
     header('Location: home.php');
   }
+
+  include 'header.php';
+  include 'forms/login_form.php';
+  include 'forms/signup_form.php';
+  include 'footer.php';
 ?>
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <title>Bark!</title>
-  </head>
-  <body>
-    <?php include 'includes/login-form.php' ?>
-    <?php include 'includes/signup-form.php' ?>
-  </body>
-</html>

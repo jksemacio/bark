@@ -24,34 +24,17 @@
       }
     }
   }
+
+  include 'header.php';
+
+  if(isset($_GET['step']) and $_GET['step'] == 1) {
+    include 'forms/username_form.php';
+  }
+
+  if(isset($_GET['step']) and $_GET['step'] == 2) {
+    echo '<h3>Welcome!</h3>
+          <a href="home.php">Go Home</a>';
+  }
+
+  include 'footer.php';
 ?>
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <title>Bark!</title>
-  </head>
-  <body>
-    <?php if(isset($_GET['step']) and $_GET['step'] == 1) { ?>
-    <form method="post">
-      <ul>
-        <li><input type="text" name="username" placeholder="Username"></li>
-        <li></li><input type="submit" name="next" value="Next">
-      </ul>
-      <span>
-        <?php
-          if(isset($error)) {
-            echo $error;
-          }
-        ?>
-      </span>
-    </form>
-    <?php } ?>
-    <?php
-      if(isset($_GET['step']) and $_GET['step'] == 2) {
-    ?>
-    <h3>Welcome!</h3>
-    <a href="home.php">Let's Go</a>
-    <?php } ?>
-  </body>
-</html>
